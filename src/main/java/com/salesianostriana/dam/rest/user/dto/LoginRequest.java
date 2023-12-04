@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.rest.user.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginRequest {
-
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
 
 }

@@ -21,24 +21,30 @@ public class TaskController {
     private final TaskRepository taskRepository;
 
     @GetMapping("/")
-    public ResponseEntity<List<Task>> getAll() {
-        List<Task> result = taskRepository.findAll();
-        if (result.isEmpty()) {
-            // Completar
+    public ResponseEntity<Optional<Task>> getAll() {
+        try {
+            Optional<Task> result = taskRepository.findAllTasks();
+            if (result.isEmpty()) {
+                throw new RuntimeException();
+            }
+            return ResponseEntity.ok(result);
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("The tasks list is empty");
         }
-        return ResponseEntity.ok(result);
-
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<Task> getById(@PathVariable Long id) {
-        Optional<Task> result = taskRepository.findById(id);
-        if (result.isEmpty()) {
-            // Completar
+        try {
+            Optional<Task> result = taskRepository.findById(id);
+            if (result.isEmpty()) {
+                throw new RuntimeException();
+            }
+            return ResponseEntity.ok(result.get());
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("The tasks does not exists");
         }
-        return ResponseEntity.ok(result.get());
-
     }
 
     @GetMapping("/dto")

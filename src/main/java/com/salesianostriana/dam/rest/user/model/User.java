@@ -47,6 +47,8 @@ public class User implements UserDetails {
 
     private String fullName;
 
+    private String email;
+
     @Builder.Default
     private boolean accountNonExpired = true;
     @Builder.Default
@@ -84,6 +86,8 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
+
+    public String getEmail() { return email; }
 
     @Override
     public boolean isAccountNonExpired() {

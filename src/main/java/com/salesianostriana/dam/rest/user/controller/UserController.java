@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.rest.user.controller;
 
+import com.salesianostriana.dam.rest.security.errorhandling.PasswordNotMatchingException;
 import com.salesianostriana.dam.rest.security.jwt.access.JwtProvider;
 import com.salesianostriana.dam.rest.user.dto.*;
 import com.salesianostriana.dam.rest.user.service.UserService;
@@ -93,7 +94,7 @@ public class UserController {
                 throw new RuntimeException();
             }
         } catch (RuntimeException ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password Data Error");
+            throw new PasswordNotMatchingException("Not matching exception: Passwords are not equals");
         }
 
         return null;
