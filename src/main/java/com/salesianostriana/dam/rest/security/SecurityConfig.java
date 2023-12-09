@@ -81,10 +81,10 @@ public class SecurityConfig {
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                        .authorizeHttpRequests((authz) -> authz
-                                .requestMatchers("/auth/register/admin").hasAuthority("ADMIN")
-                                .requestMatchers("/task*").hasAuthority("USER")
-                                .anyRequest().hasAnyAuthority());
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers(antMatcher("/auth/register/admin")).hasAuthority("ADMIN")
+                        .requestMatchers(antMatcher("/task*")).hasAuthority("USER")
+                        .anyRequest().permitAll());
 
 
 
